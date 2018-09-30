@@ -136,7 +136,7 @@ class MempoolPackagesTest(BitcoinTestFramework):
         for x in reversed(chain):
             descendant_fees += mempool[x]['fee']
             if (x == chain[-1]):
-                assert_equal(mempool[x]['modifiedfee'], mempool[x]['fee']+satoshi_round(0.00002))
+                assert_equal(mempool[x]['modifiedfee'], mempool[x]['fee']+satoshi_round(0.0002))
             assert_equal(mempool[x]['descendantfees'], descendant_fees * COIN + 2000)
 
         # TODO: check that node1's mempool is as expected

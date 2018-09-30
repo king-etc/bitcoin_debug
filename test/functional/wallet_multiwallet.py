@@ -83,7 +83,7 @@ class MultiWalletTest(BitcoinTestFramework):
         assert_equal(set(node.listwallets()), {"w4", "w5"})
         w5 = wallet("w5")
         w5_info = w5.getwalletinfo()
-        assert_equal(w5_info['immature_balance'], 50)
+        assert_equal(w5_info['immature_balance'], 500)
 
         competing_wallet_dir = os.path.join(self.options.tmpdir, 'competing_walletdir')
         os.mkdir(competing_wallet_dir)
@@ -108,7 +108,7 @@ class MultiWalletTest(BitcoinTestFramework):
 
         # check w1 wallet balance
         w1_info = w1.getwalletinfo()
-        assert_equal(w1_info['immature_balance'], 50)
+        assert_equal(w1_info['immature_balance'], 500)
         w1_name = w1_info['walletname']
         assert_equal(w1_name, "w1")
 
@@ -125,18 +125,18 @@ class MultiWalletTest(BitcoinTestFramework):
         assert_equal(w4_name, "w")
 
         w1.generate(101)
-        assert_equal(w1.getbalance(), 100)
+        assert_equal(w1.getbalance(), 1000)
         assert_equal(w2.getbalance(), 0)
         assert_equal(w3.getbalance(), 0)
         assert_equal(w4.getbalance(), 0)
 
-        w1.sendtoaddress(w2.getnewaddress(), 1)
-        w1.sendtoaddress(w3.getnewaddress(), 2)
-        w1.sendtoaddress(w4.getnewaddress(), 3)
+        w1.sendtoaddress(w2.getnewaddress(), 10)
+        w1.sendtoaddress(w3.getnewaddress(), 20)
+        w1.sendtoaddress(w4.getnewaddress(), 30)
         w1.generate(1)
-        assert_equal(w2.getbalance(), 1)
-        assert_equal(w3.getbalance(), 2)
-        assert_equal(w4.getbalance(), 3)
+        assert_equal(w2.getbalance(), 10)
+        assert_equal(w3.getbalance(), 20)
+        assert_equal(w4.getbalance(), 30)
 
         batch = w1.batch([w1.getblockchaininfo.get_request(), w1.getwalletinfo.get_request()])
         assert_equal(batch[0]["result"]["chain"], "regtest")

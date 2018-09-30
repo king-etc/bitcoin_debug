@@ -175,7 +175,10 @@ def FromHex(obj, hex_string):
 
 # Convert a binary-serializable object to hex (eg for submission via RPC)
 def ToHex(obj):
-    return bytes_to_hex_str(obj.serialize())
+    raw_tx = bytes_to_hex_str(obj.serialize())
+    block_hash = '58718699a133b08aa27d8b0b71b018e6de0a2e56ab78bcc7ed916901dfb04db3'
+    raw_tx = raw_tx[:8]+ block_hash+ raw_tx[8:]
+    return raw_tx
 
 # Objects that map to bitcoind objects, which can be serialized/deserialized
 
