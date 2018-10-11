@@ -29,7 +29,7 @@ packages:
 - "python"
 remotes:
 - "url": "https://github.com/king-etc/bitcoin_debug.git"
-  "dir": "BitcoinDiamond"
+  "dir": "bitcoin"
 files: []
 script: |
 
@@ -113,7 +113,7 @@ script: |
   chmod +x ${WRAP_DIR}/${prog}
   done
 
-  cd BitcoinDiamond
+  cd bitcoin
   BASEPREFIX=`pwd`/depends
   # Build dependencies for each host
   for i in $HOSTS; do
